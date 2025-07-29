@@ -14,12 +14,13 @@ public class ArtistaTestes
         sut = Builder<Artista>.CreateNew().Build();
     }
 
-    public class Contrutor
+    public class Construtor
     {
         [Fact]
         public void Quando_ParametrosForemValidos_Espero_ObjetoIntegro()
         {
             string nomeArtista = "Linkin Park";
+            bool ativo = true;
 
             var artista = new Artista(nomeArtista);
             artista.Nome.Should().Be(nomeArtista);
