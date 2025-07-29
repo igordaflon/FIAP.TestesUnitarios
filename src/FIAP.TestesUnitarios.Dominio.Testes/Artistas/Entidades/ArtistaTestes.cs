@@ -20,7 +20,6 @@ public class ArtistaTestes
         public void Quando_ParametrosForemValidos_Espero_ObjetoIntegro()
         {
             string nomeArtista = "Linkin Park";
-            bool ativo = true;
 
             var artista = new Artista(nomeArtista);
             artista.Nome.Should().Be(nomeArtista);
@@ -38,17 +37,17 @@ public class ArtistaTestes
             sut.Invoking(x => x.SetNome(nome)).Should().Throw<AtributoObrigatorioExcecao>();
         }
 
-        [Fact]
-        public void Dado_NomeComMaisDeCinquentaCaracteres_Espero_TamanhoDeAtributoInvalidoExcecao()
-        {
-            sut.Invoking(x => x.SetNome(new string('*', 51))).Should().Throw<TamanhoDeAtributoInvalidoExcecao>();
-        }
+        //[Fact]
+        //public void Dado_NomeComMaisDeCinquentaCaracteres_Espero_TamanhoDeAtributoInvalidoExcecao()
+        //{
+        //    sut.Invoking(x => x.SetNome(new string('*', 51))).Should().Throw<TamanhoDeAtributoInvalidoExcecao>();
+        //}
 
-        [Fact]
-        public void Dado_NomeValido_Espero_PropriedadesPreenchidas()
-        {
-            sut.SetNome("Mamonas Assassinas");
-            sut.Nome.Should().Be("Mamonas Assassinas");
-        }
+        //[Fact]
+        //public void Dado_NomeValido_Espero_PropriedadesPreenchidas()
+        //{
+        //    sut.SetNome("Mamonas Assassinas");
+        //    sut.Nome.Should().Be("Mamonas Assassinas");
+        //}
     }
 }

@@ -6,7 +6,6 @@ namespace FIAP.TestesUnitarios.Dominio.Artistas.Entidades;
 public class Artista : EntidadeBase
 {
     public virtual string Nome { get; protected set; } = string.Empty;
-    public virtual bool Ativo { get; protected set; }
 
     protected Artista() { }
 
@@ -24,10 +23,5 @@ public class Artista : EntidadeBase
             throw new TamanhoDeAtributoInvalidoExcecao(nameof(Nome), 0, 50);        
 
         Nome = nome;
-    }
-
-    public virtual void SetAtivo(bool ativo)
-    {
-        Ativo = ativo;
     }
 }
