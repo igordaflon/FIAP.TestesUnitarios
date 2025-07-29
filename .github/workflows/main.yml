@@ -26,6 +26,7 @@ jobs:
       - name: Run tests with coverage (apenas domínio)
         run: |
           dotnet test src/FIAP.TestesUnitarios.Dominio.Testes \
+            --configuration Release \
             --no-build \
             --collect:"XPlat Code Coverage" \
             -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Include="[FIAP.TestesUnitarios.Dominio*]*"
