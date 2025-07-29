@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run tests with coverage (apenas domínio)
+        run: |
+          dotnet test src/FIAP.TestesUnitarios.Dominio.Testes \
+            --collect:"XPlat Code Coverage" \
+            -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Include="[FIAP.TestesUnitarios.Dominio*]*"
+
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: Generate coverage report
+        run: |
+          reportgenerator \
+            -reports:**/coverage.cobertura.xml \
+            -targetdir:coverage-report \
+            -reporttypes:HtmlSummary
+
+      - name: Check coverage threshold
+        run: |
+          COVERAGE=$(grep -oP 'line-rate="\K[0-9.]+' $(find . -name 'coverage.cobertura.xml') | head -1)
+          PERCENT=$(echo "$COVERAGE * 100" | bc | cut -d'.' -f1)
+          echo "Cobertura: $PERCENT%"
+          if [ "$PERCENT" -lt 90 ]; then
+            echo "Coverage abaixo de 90%!"
+            exit 1
+          fi
