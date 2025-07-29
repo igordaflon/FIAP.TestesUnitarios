@@ -211,14 +211,6 @@ for (i = 0, l = charts.length; i < l; i++) {
 
 var assemblies = [
   {
-    "name": "FIAP.Core",
-    "classes": [
-      { "name": "FIAP.Core.Dominio.EntidadeBase", "rp": "FIAP.Core_EntidadeBase.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 6, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "FIAP.Core.Dominio.Exceptions.AtributoObrigatorioExcecao", "rp": "FIAP.Core_AtributoObrigatorioExcecao.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 5, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "FIAP.Core.Dominio.Exceptions.RegraDeNegocioExcecao", "rp": "FIAP.Core_RegraDeNegocioExcecao.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 5, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "FIAP.Core.Dominio.Exceptions.TamanhoDeAtributoInvalidoExcecao", "rp": "FIAP.Core_TamanhoDeAtributoInvalidoExcecao.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 7, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-    ]},
-  {
     "name": "FIAP.TestesUnitarios.Dominio",
     "classes": [
       { "name": "FIAP.TestesUnitarios.Dominio.Artistas.Entidades.Artista", "rp": "FIAP.TestesUnitarios.Dominio_Artista.html", "cl": 14, "ucl": 3, "cal": 17, "tl": 33, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },

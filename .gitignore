@@ -404,3 +404,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
+# Relatórios de cobertura
+coverage-report/
+
+# Resultados de testes do .NET
+**/TestResults/
