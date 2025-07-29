@@ -41,6 +41,12 @@ jobs:
             -targetdir:coverage-report \
             -reporttypes:HtmlSummary
 
+      - name: Upload coverage report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage-report/
+
       - name: Check coverage threshold (80%)
         run: |
           COVERAGE=$(grep -oP 'line-rate="\K[0-9.]+' $(find . -name 'coverage.cobertura.xml') | head -1)
