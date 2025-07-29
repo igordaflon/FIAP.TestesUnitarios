@@ -46,6 +46,6 @@ jobs:
           PERCENT=$(echo "$COVERAGE * 100" | bc | cut -d'.' -f1)
           echo "Cobertura: $PERCENT%"
           if [ "$PERCENT" -lt 80 ]; then
-            echo "Coverage abaixo de 80%!"
+            echo "Coverage abaixo de: 80%!"
             exit 1
           fi
