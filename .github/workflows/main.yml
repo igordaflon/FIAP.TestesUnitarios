@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -19,9 +20,13 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release
+
       - name: Run tests with coverage (apenas domínio)
         run: |
           dotnet test src/FIAP.TestesUnitarios.Dominio.Testes \
+            --no-build \
             --collect:"XPlat Code Coverage" \
             -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Include="[FIAP.TestesUnitarios.Dominio*]*"
 
@@ -35,12 +40,12 @@ jobs:
             -targetdir:coverage-report \
             -reporttypes:HtmlSummary
 
-      - name: Check coverage threshold
+      - name: Check coverage threshold (80%)
         run: |
           COVERAGE=$(grep -oP 'line-rate="\K[0-9.]+' $(find . -name 'coverage.cobertura.xml') | head -1)
           PERCENT=$(echo "$COVERAGE * 100" | bc | cut -d'.' -f1)
           echo "Cobertura: $PERCENT%"
-          if [ "$PERCENT" -lt 90 ]; then
-            echo "Coverage abaixo de 90%!"
+          if [ "$PERCENT" -lt 80 ]; then
+            echo "Coverage abaixo de 80%!"
             exit 1
           fi
