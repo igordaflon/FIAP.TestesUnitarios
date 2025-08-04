@@ -27,6 +27,7 @@ jobs:
         with:
           name: build-artifacts
           path: src/**/bin/Release/net8.0/
+          retention-days: 1
 
   unit-tests:
     needs: build
@@ -54,37 +55,34 @@ jobs:
             --collect:"XPlat Code Coverage" \
             -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Include="[FIAP.TestesUnitarios.Dominio*]*"
 
+      - name: Locate coverage file
+        run: |
+          echo "COVERAGE_FILE=$(find . -name 'coverage.cobertura.xml' -type f)" >> $GITHUB_ENV
+
       - name: Upload coverage file
         uses: actions/upload-artifact@v4
         with:
           name: coverage-file
-          path: "**/coverage.cobertura.xml"
+          path: ${{ env.COVERAGE_FILE }}
+          retention-days: 1
 
   coverage:
     needs: unit-tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-
       - name: Download coverage file
         uses: actions/download-artifact@v4
         with:
           name: coverage-file
-          path: coverage-file
-          
+          path: .
+
       - name: Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
       - name: Generate coverage report
         run: |
           reportgenerator \
-            -reports:**/coverage.cobertura.xml \
+            -reports:./coverage.cobertura.xml \
             -targetdir:coverage-report \
             -reporttypes:HtmlSummary
 
@@ -93,10 +91,11 @@ jobs:
         with:
           name: coverage-report
           path: coverage-report/
+          retention-days: 1
 
       - name: Check coverage threshold (100%)
         run: |
-          COVERAGE=$(grep -oP 'line-rate="\K[0-9.]+' $(find . -name 'coverage.cobertura.xml') | head -1)
+          COVERAGE=$(grep -oP 'line-rate="\K[0-9.]+' coverage.cobertura.xml)
           PERCENT=$(echo "$COVERAGE * 100" | bc | cut -d'.' -f1)
           echo "Cobertura: $PERCENT%"
           if [ "$PERCENT" -lt 100 ]; then
