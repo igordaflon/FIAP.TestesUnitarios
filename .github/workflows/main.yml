@@ -38,7 +38,7 @@ jobs:
         run: dotnet restore
 
       - name: Run tests
-        run: dotnet test --no-build --configuration Release
+        run: dotnet test src/FIAP.TestesUnitarios.Dominio.Testes/FIAP.TestesUnitarios.Dominio.Testes.csproj --no-build --configuration Release
 
   coverage:
     runs-on: ubuntu-latest
