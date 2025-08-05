@@ -22,14 +22,14 @@ public class ArtistaTestes
         {
             //Arrange
             string nomeArtista = "Pink Floyd";
-            GeneroEnum genero = GeneroEnum.Rock;
+            GeneroMusicalEnum genero = GeneroMusicalEnum.Rock;
 
             //Act
             var artista = new Artista(nomeArtista, genero);
 
             //Assert
             artista.Nome.Should().Be(nomeArtista);
-            artista.Genero.Should().Be(genero);
+            artista.GeneroMusical.Should().Be(genero);
         }
     }
 
@@ -85,7 +85,7 @@ public class ArtistaTestes
         public void Quando_GeneroComValorInvalido_Espero_AtributoInvalidoExcecao()
         {
             // Arrange
-            GeneroEnum generoEnum = (GeneroEnum)99;
+            GeneroMusicalEnum generoEnum = (GeneroMusicalEnum)99;
 
             // Act & Assert
             _sut.Invoking(x => x.SetGenero(generoEnum)).Should().Throw<AtributoInvalidoExcecao>();
@@ -95,13 +95,13 @@ public class ArtistaTestes
         public void Quando_GeneroValido_Espero_PropriedadePreenchida()
         {
             // Arrange
-            GeneroEnum genero = GeneroEnum.Rock;
+            GeneroMusicalEnum genero = GeneroMusicalEnum.Rock;
 
             // Act
             _sut.SetGenero(genero);
 
             // Assert
-            _sut.Genero.Should().Be(genero);
+            _sut.GeneroMusical.Should().Be(genero);
         }
     }
 }

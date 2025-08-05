@@ -7,11 +7,11 @@ namespace FIAP.TestesUnitarios.Dominio.Artistas.Entidades;
 public class Artista : EntidadeBase
 {
     public virtual string Nome { get; protected set; } = string.Empty;
-    public virtual GeneroEnum Genero { get; protected set; }
+    public virtual GeneroMusicalEnum GeneroMusical { get; protected set; }
 
     protected Artista() { }
 
-    public Artista(string nome, GeneroEnum genero)
+    public Artista(string nome, GeneroMusicalEnum genero)
     {
         SetNome(nome);
         SetGenero(genero);
@@ -28,11 +28,11 @@ public class Artista : EntidadeBase
         Nome = nome;
     }
 
-    public virtual void SetGenero(GeneroEnum genero)
+    public virtual void SetGenero(GeneroMusicalEnum generoMusical)
     {
-        if (!Enum.IsDefined(typeof(GeneroEnum), genero))
-            throw new AtributoInvalidoExcecao(nameof(Genero));
+        if (!Enum.IsDefined(typeof(GeneroMusicalEnum), generoMusical))
+            throw new AtributoInvalidoExcecao(nameof(GeneroMusical));
 
-        Genero = genero;
+        GeneroMusical = generoMusical;
     }
 }

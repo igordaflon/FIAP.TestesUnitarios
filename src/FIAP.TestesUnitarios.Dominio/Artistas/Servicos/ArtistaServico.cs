@@ -18,7 +18,7 @@ public class ArtistaServico : IArtistaServico
     {
         Artista artista = await _artistasRepositorio.RecuperarAsync(id);
 
-        if (artista == null)        
+        if (artista is null)        
             throw new RegraDeNegocioExcecao("Artista informado não encontrado.");        
 
         return artista;
