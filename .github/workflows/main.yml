@@ -50,7 +50,7 @@ jobs:
       - name: Check coverage threshold (80%)
         run: |
           COVERAGE=$(grep -oP 'line-rate="\K[0-9.]+' $(find . -name 'coverage.cobertura.xml') | head -1)
-          PERCENT=$(echo "$COVERAGE * 80" | bc | cut -d'.' -f1)
+          PERCENT=$(echo "$COVERAGE * 100" | bc | cut -d'.' -f1)
           echo "Cobertura: $PERCENT%"
           if [ "$PERCENT" -lt 80 ]; then
             echo "Coverage abaixo de 80%!"
